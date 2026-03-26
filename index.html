@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="pt-BR" class="h-full">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEHUL – Museu Digital</title>
+    <script src="/_sdk/element_sdk.js"></script>
+    <script src="/_sdk/data_sdk.js"></script>
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body class="h-full">
+
+    <!-- TOAST -->
+    <div id="toast" class="toast" role="alert" aria-live="polite"></div>
+
+    <!-- NAV -->
+    <nav class="nehul-nav" role="navigation" aria-label="Navegação principal">
+      <div style="max-width:1200px;margin:0 auto;padding:0 1.25rem;">
+        <div style="display:flex;align-items:center;justify-content:space-between;height:64px;">
+
+          <!-- Logo -->
+          <div style="display:flex;align-items:center;gap:0.75rem;cursor:pointer;" onclick="showSection('home')">
+            <div style="width:40px;height:40px;background:var(--green-light);border-radius:8px;display:flex;align-items:center;justify-content:center;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 20h20M4 20V10l8-6 8 6v10"/>
+                <path d="M10 20v-5h4v5"/>
+              </svg>
+            </div>
+            <div>
+              <div class="nehul-logo-text" style="color:#fff;font-size:1.1rem;line-height:1;" id="nav-title">NEHUL</div>
+              <div style="color:#b7e4c7;font-size:0.62rem;letter-spacing:0.08em;line-height:1.2;">IFPB – Santa Rita</div>
+            </div>
+          </div>
+
+          <!-- Desktop nav -->
+          <div id="desktop-nav" style="display:flex;align-items:center;gap:0.25rem;" aria-label="Links de navegação">
+            <span class="nav-link active" onclick="showSection('home')" id="nav-home">Início</span>
+            <span class="nav-link" onclick="showSection('about')" id="nav-about">Sobre</span>
+            <span class="nav-link" onclick="showSection('projects')" id="nav-projects">Projetos</span>
+            <span class="nav-link" onclick="showSection('team')" id="nav-team">Equipe</span>
+            <span class="nav-link" onclick="showSection('contact')" id="nav-contact">Contato</span>
+            <span class="nav-link" onclick="promptAdminAuth()" style="margin-left:0.5rem;">
+              <i data-lucide="lock" style="width:13px;height:13px;display:inline;vertical-align:middle;margin-right:3px;"></i>
+              <span id="admin-link-text">Acesso</span>
+            </span>
+          </div>
+
+          <!-- Hamburger -->
+          <button id="hamburger-btn" onclick="toggleMobileMenu()" style="background:none;border:none;cursor:pointer;padding:0.5rem;color:#fff;display:none;" aria-label="Abrir menu" aria-expanded="false">
+            <i data-lucide="menu" style="width:24px;height:24px;"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile menu -->
+      <div id="mobile-menu" class="mobile-menu" role="navigation" aria-label="Menu mobile">
+        <span class="mobile-nav-link" onclick="showSection('home');toggleMobileMenu()">Início</span>
+        <span class="mobile-nav-link" onclick="showSection('about');toggleMobileMenu()">Sobre</span>
+        <span class="mobile-nav-link" onclick="showSection('projects');toggleMobileMenu()">Projetos</span>
+        <span class="mobile-nav-link" onclick="showSection('team');toggleMobileMenu()">Equipe</span>
+        <span class="mobile-nav-link" onclick="showSection('contact');toggleMobileMenu()">Contato</span>
+        <span class="mobile-nav-link" onclick="promptAdminAuth();toggleMobileMenu()" style="margin-top:0.5rem;border-top:1px solid rgba(255,255,255,0.1);padding-top:0.65rem;">
+          <i data-lucide="lock" style="width:13px;height:13px;display:inline;vertical-align:middle;margin-right:3px;"></i>Acesso Admin
+        </span>
+      </div>
+    </nav>
+
+    <!-- MAIN -->
+    <main id="main-content">
+
+      <!-- ===== HOME ===== -->
+      <section id="section-home" class="page-section active">
+
+        <!-- Hero -->
+        <div class="hero-section" style="padding:5rem 1.25rem 4rem;text-align:center;position:relative;">
+          <div style="max-width:800px;margin:0 auto;position:relative;z-index:1;">
+            <div class="fade-up" style="display:inline-block;background:rgba(255,255,255,0.12);color:#d8f3dc;font-size:0.75rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;padding:0.4rem 1rem;border-radius:99px;margin-bottom:1.5rem;">
+              Museu Digital
+            </div>
+            <h1 class="fade-up delay-1" id="hero-title" style="font-family:'Source Serif 4',serif;font-size:clamp(2.2rem,6vw,3.8rem);font-weight:700;color:#fff;line-height:1.15;margin-bottom:1rem;">NEHUL</h1>
+            <p class="fade-up delay-2" id="hero-subtitle" style="font-size:clamp(1rem,2.5vw,1.25rem);color:#b7e4c7;font-weight:300;margin-bottom:0.75rem;line-height:1.6;">Núcleo de Estudos em Humanidades e Linguagens</p>
+            <p class="fade-up delay-2" id="hero-desc" style="font-size:0.95rem;color:#d8f3dc;max-width:560px;margin:0 auto 2.5rem;line-height:1.7;opacity:0.85;">Pesquisa, memória e cultura no IFPB Campus Santa Rita. Explore nossos projetos, exposições e produções acadêmicas.</p>
+            <div class="fade-up delay-3" style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+              <button class="btn-primary" onclick="showSection('projects')" style="font-size:0.9rem;padding:0.8rem 2rem;">
+                <i data-lucide="layout-grid" style="width:16px;height:16px;"></i> Ver Projetos
+              </button>
+              <button class="btn-secondary" onclick="showSection('about')" style="font-size:0.9rem;padding:0.8rem 2rem;">Sobre o NEHUL</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bloco de Navegação -->
+        <div class="nav-blocks-section">
+          <div class="nav-blocks-inner">
+            <div class="text-center" style="margin-bottom:3rem;">
+              <h2 style="font-family:'Source Serif 4',serif;font-size:2rem;font-weight:600;color:#fff;margin-bottom:0.5rem;">Navegação</h2>
+              <p style="color:rgba(255,255,255,0.6);font-size:0.9rem;">Explore as diferentes áreas do nosso acervo digital</p>
+            </div>
+            <div class="nav-blocks-grid">
+
+              <!-- Memorial -->
+              <div class="nav-block-card" onclick="showSection('projects');setProjectFilter('memorial')">
+                <div class="nav-block-orb"></div>
+                <div style="position:relative;">
+                  <div class="nav-block-icon">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                  </div>
+                  <h3 class="nav-block-title">Memorial</h3>
+                  <p class="nav-block-desc">Resgate histórico e memória institucional</p>
+                </div>
+              </div>
+
+              <!-- Em Andamento -->
+              <div class="nav-block-card" onclick="showSection('projects');setProjectFilter('andamento')">
+                <div class="nav-block-orb"></div>
+                <div style="position:relative;">
+                  <div class="nav-block-icon">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                  </div>
+                  <h3 class="nav-block-title">Em Andamento</h3>
+                  <p class="nav-block-desc">Projetos em desenvolvimento ativo</p>
+                </div>
+              </div>
+
+              <!-- Realizados -->
+              <div class="nav-block-card" onclick="showSection('projects');setProjectFilter('realizado')">
+                <div class="nav-block-orb"></div>
+                <div style="position:relative;">
+                  <div class="nav-block-icon">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                  </div>
+                  <h3 class="nav-block-title">Realizados</h3>
+                  <p class="nav-block-desc">Projetos concluídos com sucesso</p>
+                </div>
+              </div>
+
+              <!-- Futuros -->
+              <div class="nav-block-card" onclick="showSection('projects');setProjectFilter('futuro')">
+                <div class="nav-block-orb"></div>
+                <div style="position:relative;">
+                  <div class="nav-block-icon">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"/></svg>
+                  </div>
+                  <h3 class="nav-block-title">Futuros</h3>
+                  <p class="nav-block-desc">Próximas iniciativas planejadas</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <div style="max-width:1200px;margin:0 auto;padding:3.5rem 1.25rem;">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem;margin-bottom:3.5rem;">
+            <div class="stat-card">
+              <div style="font-size:2.5rem;font-weight:800;color:var(--green-dark);" id="stat-projects">0</div>
+              <div style="font-size:0.82rem;color:var(--gray);margin-top:0.25rem;">Projetos Cadastrados</div>
+            </div>
+            <div class="stat-card">
+              <div style="font-size:2.5rem;font-weight:800;color:var(--green-dark);">7</div>
+              <div style="font-size:0.82rem;color:var(--gray);margin-top:0.25rem;">Pesquisadores</div>
+            </div>
+            <div class="stat-card">
+              <div style="font-size:2.5rem;font-weight:800;color:var(--green-dark);">2019</div>
+              <div style="font-size:0.82rem;color:var(--gray);margin-top:0.25rem;">Ano de Fundação</div>
+            </div>
+            <div class="stat-card">
+              <div style="font-size:2.5rem;font-weight:800;color:var(--green-dark);">IFPB</div>
+              <div style="font-size:0.82rem;color:var(--gray);margin-top:0.25rem;">Campus Santa Rita</div>
+            </div>
+          </div>
+
+          <!-- Recent Projects -->
+          <h2 class="section-title" style="margin-bottom:1.75rem;">Projetos Recentes</h2>
+          <div id="home-projects-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem;">
+            <div class="empty-state" style="grid-column:1/-1;">
+              <i data-lucide="folder-open" style="width:48px;height:48px;"></i>
+              <p>Nenhum projeto cadastrado ainda.<br><span style="font-size:0.8rem;">Use o painel Admin para adicionar projetos.</span></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== ABOUT ===== -->
+      <section id="section-about" class="page-section">
+        <div style="max-width:900px;margin:0 auto;padding:3.5rem 1.25rem;">
+          <h2 class="section-title" style="margin-bottom:2rem;">Sobre o NEHUL</h2>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;align-items:start;" id="about-grid">
+            <div>
+              <p id="about-text" style="font-family:'Source Serif 4',serif;font-size:1.1rem;line-height:1.8;color:#2d3748;margin-bottom:1.5rem;">O NEHUL – Núcleo de Estudos em Humanidades e Linguagens é um grupo de pesquisa vinculado ao IFPB Campus Santa Rita, dedicado à investigação, preservação e divulgação de saberes nas áreas de humanidades, linguagens e cultura.</p>
+              <p style="font-size:0.9rem;line-height:1.8;color:var(--gray);margin-bottom:1.5rem;">Nosso museu digital preserva a memória acadêmica e cultural do núcleo, reunindo projetos, pesquisas e produções desenvolvidas por docentes, discentes e colaboradores.</p>
+              <div style="background:var(--green-pale);border-left:4px solid var(--green-main);border-radius:0 8px 8px 0;padding:1.25rem;margin-bottom:1.5rem;">
+                <p style="font-size:0.88rem;font-style:italic;color:var(--green-dark);line-height:1.7;margin:0;">"Promover o diálogo entre saberes humanísticos e científicos, contribuindo para a formação integral dos estudantes do IFPB."</p>
+              </div>
+            </div>
+            <div>
+              <div style="background:#fff;border-radius:12px;border:1px solid #e2f0e8;padding:1.5rem;box-shadow:0 2px 12px rgba(45,106,79,0.07);">
+                <h3 style="font-size:1rem;font-weight:700;color:var(--green-dark);margin-bottom:1rem;">Áreas de Atuação</h3>
+                <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.65rem;">
+                  <li class="area-item">Linguística e Literatura</li>
+                  <li class="area-item">História e Memória Cultural</li>
+                  <li class="area-item">Filosofia e Ciências Humanas</li>
+                  <li class="area-item">Artes e Expressões Culturais</li>
+                  <li class="area-item">Ensino de Línguas</li>
+                  <li class="area-item">Patrimônio Imaterial</li>
+                </ul>
+              </div>
+              <div style="background:#fff;border-radius:12px;border:1px solid #e2f0e8;padding:1.5rem;box-shadow:0 2px 12px rgba(45,106,79,0.07);margin-top:1rem;">
+                <h3 style="font-size:1rem;font-weight:700;color:var(--green-dark);margin-bottom:0.75rem;">Vinculação Institucional</h3>
+                <p style="font-size:0.88rem;color:var(--gray);line-height:1.6;margin:0;">Instituto Federal da Paraíba – IFPB<br>Campus Santa Rita<br>BR 230, Km 42, S/N – Bairro Popular<br>Santa Rita – PB</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== PROJECTS ===== -->
+      <section id="section-projects" class="page-section">
+        <div class="section-header">
+          <div style="max-width:1200px;margin:0 auto;">
+            <h2 style="font-family:'Source Serif 4',serif;font-size:2rem;color:#fff;font-weight:700;margin-bottom:0.5rem;">Projetos &amp; Exposições</h2>
+            <p style="color:#b7e4c7;font-size:0.9rem;">Explore todo o acervo de projetos do NEHUL</p>
+          </div>
+        </div>
+        <div style="max-width:1200px;margin:0 auto;padding:2.5rem 1.25rem;">
+          <div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:center;margin-bottom:1.75rem;">
+            <label for="search-input" style="display:none;">Pesquisar projetos</label>
+            <div class="search-bar" style="flex:1;min-width:220px;">
+              <i data-lucide="search" style="width:18px;height:18px;color:#9ca3af;flex-shrink:0;"></i>
+              <input id="search-input" type="text" placeholder="Pesquisar projetos..." oninput="filterProjects()">
+            </div>
+          </div>
+          <div class="category-tabs" role="tablist" aria-label="Filtrar por categoria">
+            <button class="cat-tab active" onclick="setProjectFilter('all')" id="tab-all" role="tab" aria-selected="true">Todos</button>
+            <button class="cat-tab" onclick="setProjectFilter('memorial')" id="tab-memorial" role="tab" aria-selected="false">📚 Memorial</button>
+            <button class="cat-tab" onclick="setProjectFilter('andamento')" id="tab-andamento" role="tab" aria-selected="false">🔬 Em Andamento</button>
+            <button class="cat-tab" onclick="setProjectFilter('realizado')" id="tab-realizado" role="tab" aria-selected="false">✅ Realizados</button>
+            <button class="cat-tab" onclick="setProjectFilter('futuro')" id="tab-futuro" role="tab" aria-selected="false">🚀 Futuros</button>
+          </div>
+          <div id="projects-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.25rem;" role="list" aria-label="Lista de projetos">
+            <div class="empty-state" style="grid-column:1/-1;">
+              <i data-lucide="folder-open" style="width:48px;height:48px;"></i>
+              <p>Nenhum projeto encontrado.<br><span style="font-size:0.8rem;">Use o painel Admin para adicionar projetos.</span></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== TEAM ===== -->
+      <section id="section-team" class="page-section">
+        <div class="section-header">
+          <div style="max-width:1200px;margin:0 auto;">
+            <h2 style="font-family:'Source Serif 4',serif;font-size:2rem;color:#fff;font-weight:700;margin-bottom:0.5rem;">Equipe &amp; Pesquisadores</h2>
+            <p style="color:#b7e4c7;font-size:0.9rem;">Conheça quem faz o NEHUL acontecer</p>
+          </div>
+        </div>
+        <div style="max-width:1100px;margin:0 auto;padding:3rem 1.25rem;">
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1.25rem;">
+            <div class="team-card"><div class="team-avatar">PM</div><div class="team-name">Prof. Maria Silva</div><div class="team-role">Coordenadora</div><div class="team-area">Linguística Aplicada</div></div>
+            <div class="team-card"><div class="team-avatar">JR</div><div class="team-name">Prof. João Rocha</div><div class="team-role">Vice-Coordenador</div><div class="team-area">História e Memória</div></div>
+            <div class="team-card"><div class="team-avatar">AC</div><div class="team-name">Ana Carolina</div><div class="team-role">Pesquisadora</div><div class="team-area">Literatura Brasileira</div></div>
+            <div class="team-card"><div class="team-avatar">LP</div><div class="team-name">Lucas Pereira</div><div class="team-role">Pesquisador</div><div class="team-area">Filosofia</div></div>
+            <div class="team-card"><div class="team-avatar">FO</div><div class="team-name">Fernanda Oliveira</div><div class="team-role">Bolsista</div><div class="team-area">Letras – Português</div></div>
+            <div class="team-card"><div class="team-avatar">RM</div><div class="team-name">Rafael Moura</div><div class="team-role">Bolsista</div><div class="team-area">Letras – Inglês</div></div>
+            <div class="team-card"><div class="team-avatar">BN</div><div class="team-name">Beatriz Nunes</div><div class="team-role">Voluntária</div><div class="team-area">Artes Visuais</div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== CONTACT ===== -->
+      <section id="section-contact" class="page-section">
+        <div class="section-header">
+          <div style="max-width:1200px;margin:0 auto;">
+            <h2 style="font-family:'Source Serif 4',serif;font-size:2rem;color:#fff;font-weight:700;margin-bottom:0.5rem;">Contato</h2>
+            <p style="color:#b7e4c7;font-size:0.9rem;">Fale conosco ou visite o campus</p>
+          </div>
+        </div>
+        <div style="max-width:900px;margin:0 auto;padding:3rem 1.25rem;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;">
+
+            <!-- Info -->
+            <div>
+              <h3 style="font-size:1.1rem;font-weight:700;color:var(--green-dark);margin-bottom:1.5rem;">Informações de Contato</h3>
+              <div style="display:flex;flex-direction:column;gap:1.1rem;">
+                <div class="contact-item">
+                  <div class="contact-icon"><i data-lucide="map-pin" style="width:18px;height:18px;color:var(--green-main);"></i></div>
+                  <div><div class="contact-label">Endereço</div><div class="contact-value">BR 230, Km 42, S/N, Bairro Popular<br>Santa Rita – PB. CEP: 58.301-645</div></div>
+                </div>
+                <div class="contact-item">
+                  <div class="contact-icon"><i data-lucide="phone" style="width:18px;height:18px;color:var(--green-main);"></i></div>
+                  <div><div class="contact-label">Telefone</div><div class="contact-value">(83) 99115-7975</div></div>
+                </div>
+                <div class="contact-item">
+                  <div class="contact-icon"><i data-lucide="mail" style="width:18px;height:18px;color:var(--green-main);"></i></div>
+                  <div><div class="contact-label">E-mail</div><div id="contact-email-display" class="contact-value">nehul@ifpb.edu.br</div></div>
+                </div>
+                <div class="contact-item">
+                  <div class="contact-icon"><i data-lucide="globe" style="width:18px;height:18px;color:var(--green-main);"></i></div>
+                  <div><div class="contact-label">Site Institucional</div><a href="https://www.ifpb.edu.br/santarita" target="_blank" rel="noopener noreferrer" class="contact-link">www.ifpb.edu.br/santarita</a></div>
+                </div>
+                <div class="contact-item">
+                  <div class="contact-icon"><i data-lucide="instagram" style="width:18px;height:18px;color:var(--green-main);"></i></div>
+                  <div><div class="contact-label">Instagram</div><a href="https://www.instagram.com/ifpbsantarita" target="_blank" rel="noopener noreferrer" class="contact-link">@ifpbsantarita</a></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Form -->
+            <div>
+              <h3 style="font-size:1.1rem;font-weight:700;color:var(--green-dark);margin-bottom:1.5rem;">Enviar Mensagem</h3>
+              <form id="contact-form" onsubmit="submitContact(event)" style="display:flex;flex-direction:column;gap:1rem;">
+                <div>
+                  <label for="contact-name" class="form-label">Nome</label>
+                  <input id="contact-name" type="text" class="form-input" placeholder="Seu nome" required>
+                </div>
+                <div>
+                  <label for="contact-email-input" class="form-label">E-mail</label>
+                  <input id="contact-email-input" type="email" class="form-input" placeholder="seu@email.com" required>
+                </div>
+                <div>
+                  <label for="contact-message" class="form-label">Mensagem</label>
+                  <textarea id="contact-message" class="form-input" rows="4" placeholder="Como podemos ajudar?" required style="resize:vertical;"></textarea>
+                </div>
+                <button type="submit" class="btn-primary" style="align-self:flex-start;">
+                  <i data-lucide="send" style="width:15px;height:15px;"></i> Enviar
+                </button>
+                <div id="contact-success" style="display:none;background:#d8f3dc;border-radius:8px;padding:0.75rem 1rem;font-size:0.85rem;color:var(--green-dark);font-weight:500;">
+                  ✅ Mensagem enviada! Entraremos em contato em breve.
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== ADMIN ===== -->
+      <section id="section-admin" class="page-section">
+        <div class="section-header">
+          <div style="max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:1rem;">
+            <div style="width:44px;height:44px;background:rgba(255,255,255,0.15);border-radius:10px;display:flex;align-items:center;justify-content:center;">
+              <i data-lucide="settings" style="width:22px;height:22px;color:#fff;"></i>
+            </div>
+            <div>
+              <h2 style="font-family:'Source Serif 4',serif;font-size:1.8rem;color:#fff;font-weight:700;margin:0 0 0.25rem;">Painel Administrativo</h2>
+              <p style="color:#b7e4c7;font-size:0.88rem;margin:0;">Gerencie projetos e conteúdos do NEHUL</p>
+            </div>
+          </div>
+        </div>
+        <div style="max-width:1100px;margin:0 auto;padding:2.5rem 1.25rem;">
+
+          <!-- Limit warning -->
+          <div id="limit-warning" class="limit-warning" style="display:none;margin-bottom:1.5rem;">
+            <i data-lucide="alert-triangle" style="width:18px;height:18px;flex-shrink:0;"></i>
+            <span>Limite máximo de 999 projetos atingido. Exclua projetos para adicionar novos.</span>
+          </div>
+
+          <!-- Add/Edit Form -->
+          <div class="admin-panel" id="admin-form-area">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;flex-wrap:wrap;gap:0.5rem;">
+              <h3 id="form-title" style="font-size:1rem;font-weight:700;color:var(--green-dark);margin:0;">➕ Adicionar Projeto</h3>
+              <button id="cancel-edit-btn" onclick="cancelEdit()" class="btn-secondary" style="display:none;font-size:0.8rem;padding:0.45rem 1rem;">
+                <i data-lucide="x" style="width:14px;height:14px;"></i> Cancelar
+              </button>
+            </div>
+            <form id="project-form" onsubmit="saveProject(event)">
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;">
+                <div>
+                  <label for="p-title" class="form-label">Título *</label>
+                  <input id="p-title" type="text" class="form-input" placeholder="Título do projeto" required>
+                </div>
+                <div>
+                  <label for="p-author" class="form-label">Autor / Responsável</label>
+                  <input id="p-author" type="text" class="form-input" placeholder="Nome do autor">
+                </div>
+                <div>
+                  <label for="p-status" class="form-label">Categoria *</label>
+                  <select id="p-status" class="form-input" required>
+                    <option value="">Selecione...</option>
+                    <option value="memorial">📚 Memorial</option>
+                    <option value="andamento">🔬 Em Andamento</option>
+                    <option value="realizado">✅ Realizado</option>
+                    <option value="futuro">🚀 Futuro</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="p-year" class="form-label">Ano</label>
+                  <input id="p-year" type="text" class="form-input" placeholder="2024" maxlength="4">
+                </div>
+              </div>
+              <div style="margin-bottom:1rem;">
+                <label for="p-tags" class="form-label">Tags (separadas por vírgula)</label>
+                <input id="p-tags" type="text" class="form-input" placeholder="linguística, cultura, identidade">
+              </div>
+              <div style="margin-bottom:1.25rem;">
+                <label for="p-desc" class="form-label">Descrição *</label>
+                <textarea id="p-desc" class="form-input" rows="4" placeholder="Descreva o projeto..." required style="resize:vertical;"></textarea>
+              </div>
+              <input type="hidden" id="p-edit-id" value="">
+              <button type="submit" class="btn-primary" id="save-btn">
+                <i data-lucide="save" style="width:15px;height:15px;"></i>
+                <span id="save-btn-label">Salvar Projeto</span>
+              </button>
+            </form>
+          </div>
+
+          <!-- Admin list -->
+          <h3 style="font-size:1rem;font-weight:700;color:var(--green-dark);margin-bottom:1rem;">Projetos Cadastrados</h3>
+          <div id="admin-projects-list" style="display:flex;flex-direction:column;gap:0.75rem;">
+            <div class="empty-state">
+              <i data-lucide="inbox" style="width:40px;height:40px;"></i>
+              <p style="font-size:0.88rem;">Nenhum projeto cadastrado ainda.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="nehul-footer" role="contentinfo">
+      <div style="max-width:1200px;margin:0 auto;padding:2.5rem 1.25rem 1.5rem;">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;margin-bottom:2rem;">
+          <div>
+            <div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:0.75rem;">
+              <div style="width:32px;height:32px;background:var(--green-light);border-radius:6px;display:flex;align-items:center;justify-content:center;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M2 20h20M4 20V10l8-6 8 6v10"/><path d="M10 20v-5h4v5"/>
+                </svg>
+              </div>
+              <span style="font-weight:800;font-size:1rem;color:#fff;">NEHUL</span>
+            </div>
+            <p style="font-size:0.8rem;line-height:1.7;color:#b7e4c7;margin:0;">Núcleo de Estudos em Humanidades e Linguagens<br>IFPB – Campus Santa Rita</p>
+          </div>
+          <div>
+            <div class="footer-heading">Navegação</div>
+            <div style="display:flex;flex-direction:column;gap:0.4rem;">
+              <span class="footer-link" onclick="showSection('home')">Início</span>
+              <span class="footer-link" onclick="showSection('about')">Sobre</span>
+              <span class="footer-link" onclick="showSection('projects')">Projetos</span>
+              <span class="footer-link" onclick="showSection('team')">Equipe</span>
+              <span class="footer-link" onclick="showSection('contact')">Contato</span>
+            </div>
+          </div>
+          <div>
+            <div class="footer-heading">Contato</div>
+            <div style="font-size:0.8rem;color:#b7e4c7;line-height:1.8;">
+              <div>BR 230, Km 42, S/N</div>
+              <div>Bairro Popular – Santa Rita/PB</div>
+              <div>CEP: 58.301-645</div>
+              <div style="margin-top:0.5rem;">(83) 99115-7975</div>
+            </div>
+          </div>
+        </div>
+        <div style="border-top:1px solid rgba(255,255,255,0.1);padding-top:1.25rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;">
+          <span style="font-size:0.75rem;color:#52b788;">© 2024 NEHUL – IFPB Campus Santa Rita. Todos os direitos reservados.</span>
+          <a href="https://www.ifpb.edu.br/santarita" target="_blank" rel="noopener noreferrer" class="footer-link" style="font-size:0.75rem;">www.ifpb.edu.br/santarita</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- PROJECT MODAL -->
+    <div id="project-modal" class="modal-overlay" style="display:none;" role="dialog" aria-modal="true" aria-labelledby="modal-project-title">
+      <div class="modal-box">
+        <div class="modal-header">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+            <div style="flex:1;padding-right:1rem;">
+              <div id="modal-badge" style="margin-bottom:0.75rem;"></div>
+              <h2 id="modal-project-title" style="font-family:'Source Serif 4',serif;font-size:1.6rem;color:#fff;font-weight:700;margin:0 0 0.5rem;line-height:1.25;"></h2>
+              <div id="modal-meta" style="display:flex;gap:1rem;flex-wrap:wrap;font-size:0.82rem;color:#b7e4c7;"></div>
+            </div>
+            <button onclick="closeModal()" style="background:rgba(255,255,255,0.15);border:none;border-radius:8px;padding:0.6rem;cursor:pointer;color:#fff;flex-shrink:0;" aria-label="Fechar modal">
+              <i data-lucide="x" style="width:18px;height:18px;"></i>
+            </button>
+          </div>
+        </div>
+        <div style="padding:1.75rem;">
+          <h3 style="font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--green-dark);margin-bottom:0.75rem;">Descrição</h3>
+          <p id="modal-description" style="font-size:0.95rem;line-height:1.8;color:var(--gray);margin-bottom:1.5rem;"></p>
+          <div id="modal-tags" style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1rem;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

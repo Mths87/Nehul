@@ -29,6 +29,14 @@
   gap: 12px;
 }
 
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
 .logo-mark {
   width: 40px;
   height: 40px;

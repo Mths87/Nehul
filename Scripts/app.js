@@ -29,3 +29,50 @@ document.querySelector('.btn-primary')?.addEventListener('click', () => {
 document.querySelector('.btn-secondary')?.addEventListener('click', () => {
   document.querySelector('.sobre')?.scrollIntoView({ behavior: 'smooth' });
 });
+
+async function uploadProject() {
+  const file = document.getElementById("fileInput").files[0];
+
+  if (!file) {
+    alert("Selecione um arquivo!");
+    return;
+  }
+
+  // 1. Enviar arquivo pro backend
+  const formData = new FormData();
+  formData.append("file", file);
+
+  const response = await fetch("http://localhost:3000/upload", {
+    method: "POST",
+    body: formData
+  });
+
+  const data = await response.json();
+
+  console.log("URL do arquivo:", data.url);
+
+}
+
+async function createProject() {
+  const file = document.getElementById("fileInput").files[0];
+
+  // upload
+  const formData = new FormData();
+  formData.append("file", file);
+
+  const uploadRes = await fetch("http://localhost:3000/upload", {
+    method: "POST",
+    body: formData
+  });
+
+  const uploadData = await uploadRes.json();
+
+  // criar projeto
+  const project = {
+    title: "Título",
+    description: "Descrição",
+    imageUrl: uploadData.url
+  };
+
+  console.log(project);
+}

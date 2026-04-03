@@ -2,3 +2,5 @@ npx nodemon server.js : Ele inicia o seu servidor Node.js com reinicialização 
 
 npm run dev : para rodar o backend
 http://localhost:3000/ : para acessar e verificar se o bd ta ativo
+
+pra rodar o bd tem que baixar o nodejs 

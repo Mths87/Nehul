@@ -1,9 +1,12 @@
-/* ============================================
-   NEHUL – Museu Digital
-   app.js — interações da página
-   ============================================ */
+if (window.location.pathname.includes("criar.html")) {
+  const token = localStorage.getItem("token");
 
-// Navegação: ativa o link correspondente à seção atual
+  if (token !== "admin-token") {
+    alert("Acesso negado");
+    window.location.href = "login.html";
+  }
+}
+
 document.querySelectorAll('.nav a').forEach(link => {
   link.addEventListener('click', function () {
     document.querySelectorAll('.nav a').forEach(l => l.classList.remove('active'));
@@ -109,4 +112,36 @@ document.addEventListener("DOMContentLoaded", () => {
   if (document.getElementById("projectsContainer")) {
     loadProjects();
   }
+});
+
+async function login() {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  const res = await fetch("http://localhost:3000/auth/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ email, password })
+  });
+
+  const data = await res.json();
+
+  if (data.token) {
+    localStorage.setItem("token", data.token);
+    alert("Login feito!");
+    window.location.href = "criar.html";
+  } else {
+    alert("Erro no login");
+  }
+}
+
+await fetch("http://localhost:3000/projects", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    "Authorization": localStorage.getItem("token")
+  },
+  body: JSON.stringify(project)
 });

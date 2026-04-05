@@ -1,3 +1,4 @@
+// 🔐 proteção da página criar.html
 if (window.location.pathname.includes("criar.html")) {
   const token = localStorage.getItem("token");
 
@@ -7,6 +8,7 @@ if (window.location.pathname.includes("criar.html")) {
   }
 }
 
+// 🎯 ativar link da navbar
 document.querySelectorAll('.nav a').forEach(link => {
   link.addEventListener('click', function () {
     document.querySelectorAll('.nav a').forEach(l => l.classList.remove('active'));
@@ -14,25 +16,24 @@ document.querySelectorAll('.nav a').forEach(link => {
   });
 });
 
-// Cards de navegação: pronto para receber ação de roteamento
+// 🧭 navegação dos cards
 document.querySelectorAll('.nav-card').forEach(card => {
   card.addEventListener('click', function () {
     const title = this.querySelector('h3').textContent.trim();
     console.log('Navegar para:', title);
-    // Adicione aqui o roteamento quando integrar com o resto do site
   });
 });
 
-// Botões do hero
+// 🎯 botões hero
 document.querySelector('.btn-primary')?.addEventListener('click', () => {
   console.log('Explorar Exposições clicado');
-  // Adicione aqui a navegação para a seção de exposições
 });
 
 document.querySelector('.btn-secondary')?.addEventListener('click', () => {
   document.querySelector('.sobre')?.scrollIntoView({ behavior: 'smooth' });
 });
 
+// 📤 upload (ainda simples)
 async function uploadProject() {
   const file = document.getElementById("fileInput").files[0];
 
@@ -41,7 +42,6 @@ async function uploadProject() {
     return;
   }
 
-  // 1. Enviar arquivo pro backend
   const formData = new FormData();
   formData.append("file", file);
 
@@ -51,35 +51,31 @@ async function uploadProject() {
   });
 
   const data = await response.json();
-
-  console.log("URL do arquivo:", data.url);
-
+  return data.url;
 }
 
-//async function createProject() {
-  //const file = document.getElementById("fileInput").files[0];
+// ➕ CRIAR PROJETO (AGORA CORRETO)
+async function createProject() {
+  const project = {
+    title: document.getElementById("title")?.value,
+    description: document.getElementById("description")?.value,
+    status: "andamento"
+  };
 
-  // upload
-  //const formData = new FormData();
-  //formData.append("file", file);
+  await fetch("http://localhost:3000/projects", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": localStorage.getItem("token")
+    },
+    body: JSON.stringify(project)
+  });
 
-  //const uploadRes = await fetch("http://localhost:3000/upload", {
-    //method: "POST",
-    //body: formData
-  //});
+  alert("Projeto criado!");
+  window.location.href = "andamento.html";
+}
 
-  //const uploadData = await uploadRes.json();
-
-  // criar projeto
-  //const project = {
-    //title: "Título",
-    //description: "Descrição",
-    //imageUrl: uploadData.url
-  //};
-
- //console.log(project);
-//}
-
+// 📥 carregar projetos
 async function loadProjects() {
   const response = await fetch("http://localhost:3000/projects");
   const projects = await response.json();
@@ -87,8 +83,10 @@ async function loadProjects() {
   renderProjects(projects);
 }
 
+// 🎨 renderizar projetos
 function renderProjects(projects) {
   const container = document.getElementById("projectsContainer");
+  if (!container) return;
 
   container.innerHTML = "";
 
@@ -108,12 +106,25 @@ function renderProjects(projects) {
     });
 }
 
+// 🚀 iniciar página
 document.addEventListener("DOMContentLoaded", () => {
+
+  // carregar projetos se existir container
   if (document.getElementById("projectsContainer")) {
     loadProjects();
   }
+
+  // 👑 mostrar botão admin
+  const adminBtn = document.getElementById("adminBtn");
+
+  if (localStorage.getItem("token") === "admin-token") {
+    if (adminBtn) adminBtn.style.display = "block";
+  } else {
+    if (adminBtn) adminBtn.style.display = "none";
+  }
 });
 
+// 🔐 login
 async function login() {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
@@ -136,12 +147,3 @@ async function login() {
     alert("Erro no login");
   }
 }
-
-await fetch("http://localhost:3000/projects", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-    "Authorization": localStorage.getItem("token")
-  },
-  body: JSON.stringify(project)
-});

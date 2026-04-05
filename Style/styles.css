@@ -405,3 +405,45 @@ a:hover {
   .sobre-img      { display: none; }
   .nav            { display: none; }
 }
+
+/* LOGIN */
+.login-card {
+  max-width: 400px;
+  margin: 80px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.login-card input {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.login-card button {
+  padding: 10px;
+  border: none;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.login-card button:hover {
+  background-color: #45a049;
+}
+
+#adminBtn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: none;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#adminBtn:hover {
+  background-color: #45a049;
+}

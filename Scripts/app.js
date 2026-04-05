@@ -53,26 +53,60 @@ async function uploadProject() {
 
 }
 
-async function createProject() {
-  const file = document.getElementById("fileInput").files[0];
+//async function createProject() {
+  //const file = document.getElementById("fileInput").files[0];
 
   // upload
-  const formData = new FormData();
-  formData.append("file", file);
+  //const formData = new FormData();
+  //formData.append("file", file);
 
-  const uploadRes = await fetch("http://localhost:3000/upload", {
-    method: "POST",
-    body: formData
-  });
+  //const uploadRes = await fetch("http://localhost:3000/upload", {
+    //method: "POST",
+    //body: formData
+  //});
 
-  const uploadData = await uploadRes.json();
+  //const uploadData = await uploadRes.json();
 
   // criar projeto
-  const project = {
-    title: "Título",
-    description: "Descrição",
-    imageUrl: uploadData.url
-  };
+  //const project = {
+    //title: "Título",
+    //description: "Descrição",
+    //imageUrl: uploadData.url
+  //};
 
-  console.log(project);
+ //console.log(project);
+//}
+
+async function loadProjects() {
+  const response = await fetch("http://localhost:3000/projects");
+  const projects = await response.json();
+
+  renderProjects(projects);
 }
+
+function renderProjects(projects) {
+  const container = document.getElementById("projectsContainer");
+
+  container.innerHTML = "";
+
+  projects
+    .filter(p => p.status === "andamento")
+    .forEach(project => {
+      const card = document.createElement("div");
+      card.classList.add("nav-card");
+
+      card.innerHTML = `
+        <div class="nav-card-icon">⚙️</div>
+        <h3>${project.title}</h3>
+        <p>${project.description}</p>
+      `;
+
+      container.appendChild(card);
+    });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  if (document.getElementById("projectsContainer")) {
+    loadProjects();
+  }
+});

@@ -2,12 +2,11 @@ const express = require("express");
 
 const app = express();
 
-const uploadRoutes = require("./Routes/upload");
+const projectRoutes = require("./Routes/projects");
+app.use("/projects", projectRoutes);
 
 const cors = require("cors");
 app.use(cors());
-
-app.use("/upload", uploadRoutes);
 
 app.get("/", (req, res) => {
   res.send("Servidor rodando 🚀");

@@ -17,7 +17,7 @@
 <body>
 <div class="page">
 
-  <!-- HEADER (igual ao index) -->
+  <!-- HEADER -->
   <header class="header">
     <div class="logo">
       <div class="logo-mark"><span>N</span></div>
@@ -36,45 +36,21 @@
     </nav>
   </header>
 
-  <!-- HERO SIMPLES -->
+  <!-- HERO -->
   <section class="hero">
     <h1 class="hero-title">Em Andamento</h1>
-    <p class="hero-subtitle">Projetos que já foram iniciados e estão em desenvolvimento</p>
+    <p class="hero-subtitle">
+      Projetos que já foram iniciados e estão em desenvolvimento
+    </p>
   </section>
 
-  <!-- PROJETOS -->
+  <!-- PROJETOS DINÂMICOS -->
   <section class="sobre">
     <div class="sobre-inner" style="grid-template-columns: 1fr; max-width: 1000px;">
 
-      <div class="nav-grid" style="grid-template-columns: repeat(3, 1fr);">
-
-        <!-- CARD 1 -->
-        <div class="nav-card">
-          <div class="nav-card-icon">
-            ⚙️
-          </div>
-          <h3>Projeto X</h3>
-          <p>Descrição breve do projeto em desenvolvimento.</p>
-        </div>
-
-        <!-- CARD 2 -->
-        <div class="nav-card">
-          <div class="nav-card-icon">
-            📊
-          </div>
-          <h3>Sistema de Dados</h3>
-          <p>Coleta e análise de dados históricos da região.</p>
-        </div>
-
-        <!-- CARD 3 -->
-        <div class="nav-card">
-          <div class="nav-card-icon">
-            🖥️
-          </div>
-          <h3>Museu Digital</h3>
-          <p>Desenvolvimento da plataforma web do NEHUL.</p>
-        </div>
-
+      <!-- 🔥 AQUI É O PONTO IMPORTANTE -->
+      <div class="nav-grid" id="projectsContainer" style="grid-template-columns: repeat(3, 1fr);">
+        <!-- os projetos vão aparecer aqui via JS -->
       </div>
 
     </div>
@@ -99,5 +75,8 @@
   </footer>
 
 </div>
+
+<!-- JS -->
+<script src="../Scripts/app.js"></script>
 </body>
 </html>

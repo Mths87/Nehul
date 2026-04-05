@@ -1,11 +1,103 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Andamento</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Em Andamento</title>
+
+  <!-- FONTES -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="../Style/styles.css">
 </head>
+
 <body>
-    <p><a href="index.html">Home</a></p>
+<div class="page">
+
+  <!-- HEADER (igual ao index) -->
+  <header class="header">
+    <div class="logo">
+      <div class="logo-mark"><span>N</span></div>
+      <div class="logo-text">
+        <strong>NEHUL</strong>
+        <small>IFPB — Campus Santa Rita</small>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="memorial.html">Memorial</a>
+      <a href="andamento.html">Em Andamento</a>
+      <a href="realizados.html">Realizados</a>
+      <a href="futuros.html">Futuros</a>
+    </nav>
+  </header>
+
+  <!-- HERO SIMPLES -->
+  <section class="hero">
+    <h1 class="hero-title">Em Andamento</h1>
+    <p class="hero-subtitle">Projetos que já foram iniciados e estão em desenvolvimento</p>
+  </section>
+
+  <!-- PROJETOS -->
+  <section class="sobre">
+    <div class="sobre-inner" style="grid-template-columns: 1fr; max-width: 1000px;">
+
+      <div class="nav-grid" style="grid-template-columns: repeat(3, 1fr);">
+
+        <!-- CARD 1 -->
+        <div class="nav-card">
+          <div class="nav-card-icon">
+            ⚙️
+          </div>
+          <h3>Projeto X</h3>
+          <p>Descrição breve do projeto em desenvolvimento.</p>
+        </div>
+
+        <!-- CARD 2 -->
+        <div class="nav-card">
+          <div class="nav-card-icon">
+            📊
+          </div>
+          <h3>Sistema de Dados</h3>
+          <p>Coleta e análise de dados históricos da região.</p>
+        </div>
+
+        <!-- CARD 3 -->
+        <div class="nav-card">
+          <div class="nav-card-icon">
+            🖥️
+          </div>
+          <h3>Museu Digital</h3>
+          <p>Desenvolvimento da plataforma web do NEHUL.</p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo-mark"><span>N</span></div>
+        <div>
+          <div class="footer-name">NEHUL</div>
+          <div class="footer-tagline">Núcleo de Estudos em Humanidades e Linguagens</div>
+        </div>
+      </div>
+
+      <div class="footer-info">
+        <div>IFPB — Campus Santa Rita</div>
+        <div>BR 230, Km 42 · Santa Rita - PB</div>
+      </div>
+    </div>
+  </footer>
+
+</div>
 </body>
 </html>

@@ -183,94 +183,116 @@ a:hover {
 }
 .btn-secondary:hover { background: #f5f5f5; }
 
-/* ── Sobre ──────────────────────────────── */
-.sobre {
+/* ── Sobre (seção da index) ─────────────── */
+.sobre-section {
   padding: 4rem 2rem;
-  background: #F4FAF6;
+  border-top: 1px solid #e8e8e8;
 }
 
 .sobre-inner {
   max-width: 900px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
-  align-items: center;
+}
+
+.sobre-header {
+  margin-bottom: 2rem;
 }
 
 .sobre-label {
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.1em;
-  color: #1E6B3C;
+  color: #888;
   text-transform: uppercase;
-  margin-bottom: 0.75rem;
+  margin-bottom: 6px;
+  display: block;
 }
 
-.sobre-title {
+.sobre-section-title {
   font-family: 'Instrument Serif', serif;
-  font-size: clamp(28px, 4vw, 40px);
+  font-size: clamp(24px, 3.5vw, 36px);
   color: #111;
-  margin-bottom: 1.25rem;
   line-height: 1.15;
+  font-weight: 400;
 }
 
-.sobre-text {
+.sobre-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.sobre-text p {
   font-size: 14px;
   color: #444;
   line-height: 1.8;
   margin-bottom: 0.85rem;
 }
-.sobre-text strong { color: #111; }
+.sobre-text p strong { color: #111; font-weight: 500; }
 
-.stats {
+.sobre-pillars {
   display: flex;
-  gap: 2rem;
-  margin-top: 1.75rem;
   flex-wrap: wrap;
-}
-.stat-num {
-  font-family: 'Instrument Serif', serif;
-  font-size: 36px;
-  color: #1E6B3C;
-}
-.stat-label {
-  font-size: 12px;
-  color: #666;
-  margin-top: 2px;
+  gap: 10px;
+  margin-top: 1.5rem;
 }
 
-.sobre-img {
-  background: #fff;
-  border: 1.5px solid rgba(30,107,60,0.2);
-  border-radius: 8px;
-  aspect-ratio: 1;
+.sobre-pillar {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #333;
+  background: #f4f4f4;
+  border: 1px solid #e4e4e4;
+  border-radius: 100px;
+  padding: 6px 14px 6px 10px;
+}
+
+.pillar-icon {
+  display: flex;
+  align-items: center;
+  color: #555;
+}
+
+.sobre-quote {
+  border-left: 2px solid #1E6B3C;
+  padding-left: 1.5rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
+  gap: 1.5rem;
 }
-.icon-circle {
-  width: 72px;
-  height: 72px;
-  border: 2px solid #1E6B3C;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.sobre-img-title {
-  font-size: 13px;
-  color: #1E6B3C;
-  font-weight: 600;
-}
-.sobre-img-desc {
-  font-size: 12px;
-  color: #555;
-  text-align: center;
-  padding: 0 1.5rem;
+
+.sobre-quote blockquote {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 1.15rem;
+  color: #222;
   line-height: 1.6;
+  margin: 0;
+}
+
+.sobre-missao {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sobre-missao-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #999;
+}
+
+.sobre-missao p {
+  font-size: 13px;
+  color: #555;
+  line-height: 1.7;
+  margin: 0;
 }
 
 /* ── Seção de Navegação ─────────────────── */
@@ -400,10 +422,9 @@ a:hover {
 
 /* ── Responsivo ─────────────────────────── */
 @media (max-width: 700px) {
-  .nav-grid       { grid-template-columns: 1fr 1fr; }
-  .sobre-inner    { grid-template-columns: 1fr; }
-  .sobre-img      { display: none; }
-  .nav            { display: none; }
+  .nav-grid        { grid-template-columns: 1fr 1fr; }
+  .sobre-content   { grid-template-columns: 1fr; }
+  .nav             { display: none; }
 }
 
 /* LOGIN */

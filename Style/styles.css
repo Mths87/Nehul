@@ -318,9 +318,9 @@ a:hover {
 
 .nav-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 16px;
-  max-width: 900px;
+  max-width: 1100px;
   margin: 0 auto;
 }
 
@@ -421,10 +421,13 @@ a:hover {
 .footer-site { color: rgba(255,255,255,0.9); }
 
 /* ── Responsivo ─────────────────────────── */
+@media (max-width: 900px) {
+  .nav-grid       { grid-template-columns: repeat(3, 1fr); }
+}
 @media (max-width: 700px) {
-  .nav-grid        { grid-template-columns: 1fr 1fr; }
-  .sobre-content   { grid-template-columns: 1fr; }
-  .nav             { display: none; }
+  .nav-grid       { grid-template-columns: 1fr 1fr; }
+  .sobre-content  { grid-template-columns: 1fr; }
+  .nav            { display: none; }
 }
 
 /* LOGIN */

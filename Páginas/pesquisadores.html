@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pesquisadores – NEHUL</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../Style/styles.css">
+  <link rel="stylesheet" href="../Style/pages.css">
+</head>
+
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <header class="header">
+    <a href="index.html" class="logo">
+      <div class="logo-mark"><span>N</span></div>
+      <div class="logo-text">
+        <strong>NEHUL</strong>
+        <small>IFPB — Campus Santa Rita</small>
+      </div>
+    </a>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="memorial.html">Memorial</a>
+      <a href="andamento.html">Em Andamento</a>
+      <a href="realizados.html">Realizados</a>
+      <a href="futuros.html">Futuros</a>
+      <a href="pesquisadores.html" class="nav-active">Pesquisadores</a>
+      <a href="login.html">Admin</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="pill"><span class="pill-dot"></span> Equipe NEHUL</div>
+    <h1 class="hero-title">Pesquisadores</h1>
+    <p class="hero-subtitle">Conheça os integrantes do Núcleo de Estudos em Humanidades e Linguagens</p>
+
+    <button id="adminBtn" style="display:none;" onclick="openModal()">
+      + Novo Pesquisador
+    </button>
+  </section>
+
+  <!-- PESQUISADORES -->
+  <section class="sobre">
+    <div class="sobre-inner" style="grid-template-columns: 1fr; max-width: 1100px;">
+      <div class="projects-grid" id="projectsContainer">
+        <!-- cards renderizados pelo JS -->
+      </div>
+      <div id="emptyState" class="empty-state" style="display:none;">
+        <p>Nenhum pesquisador cadastrado ainda.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODAL ADMIN -->
+  <div id="adminModal" class="modal-overlay" style="display:none;">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h2>Novo Pesquisador</h2>
+        <button class="modal-close" onclick="closeModal()">✕</button>
+      </div>
+      <form id="projectForm" class="project-form" onsubmit="submitProject(event)">
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nome *</label>
+            <input type="text" id="f-title" placeholder="Nome completo" required>
+          </div>
+          <div class="form-group">
+            <label>Área de Atuação *</label>
+            <input type="text" id="f-tema" placeholder="Ex: História, Literatura" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Descrição / Biografia *</label>
+          <textarea id="f-desc" rows="4" placeholder="Descreva o pesquisador..." required></textarea>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Vínculo</label>
+            <input type="text" id="f-pesquisadores" placeholder="Ex: Professor, Bolsista, Voluntário">
+          </div>
+          <div class="form-group">
+            <label>Foto</label>
+            <input type="file" id="f-fotos" multiple accept="image/*">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Ingresso no NEHUL *</label>
+            <input type="date" id="f-inicio" required>
+          </div>
+          <div class="form-group">
+            <label>Lattes / LinkedIn</label>
+            <input type="text" id="f-previsao" placeholder="URL do perfil">
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn-secondary" onclick="closeModal()">Cancelar</button>
+          <button type="submit" class="btn-primary" id="submitBtn">Salvar Pesquisador</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo-mark"><span>N</span></div>
+        <div>
+          <div class="footer-name">NEHUL</div>
+          <div class="footer-tagline">Núcleo de Estudos em Humanidades e Linguagens</div>
+        </div>
+      </div>
+      <div class="footer-info">
+        <div>IFPB — Campus Santa Rita</div>
+        <div>BR 230, Km 42 · Santa Rita - PB</div>
+        <div class="footer-site">www.ifpb.edu.br/santarita</div>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<script src="../Scripts/app.js"></script>
+<script src="../Scripts/pesquisadores.js"></script>
+</body>
+</html>
